@@ -1,25 +1,66 @@
 :root {
-    /* Main palette */
-    --color-primary: #1677B8;       /* Deep Sky Blue */
-    --color-secondary: #63C5F2;     /* Sky Blue */
-    --color-accent: #BDEBFF;        /* Ice Blue */
+    /* =================================
+       MAIN THEME COLORS
+    ================================= */
+
+    --color-primary: #1677B8;
+    --color-secondary: #63C5F2;
+    --color-accent: #BDEBFF;
 
     /* Text */
-    --color-text: #F0FAFF;          /* Snow White */
+    --color-text: #F0FAFF;
     --color-text-secondary: #D0F0FF;
 
     /* Backgrounds */
     --color-background-dark: rgba(0, 75, 130, 0.85);
     --color-background-light: rgba(100, 200, 255, 0.25);
 
-    /* Borders and effects */
+    /* =================================
+       GRADIENT COLORS
+    ================================= */
+
+    --gradient-message-start: var(--color-background-light);
+    --gradient-message-end: rgba(190, 235, 255, 0.12);
+
+    --gradient-user-start: var(--color-background-dark);
+    --gradient-user-end: rgba(50, 160, 220, 0.9);
+
+    --gradient-alert-start: rgba(70, 180, 240, 0.4);
+    --gradient-alert-end: rgba(190, 235, 255, 0.2);
+
+    /* =================================
+       BORDERS AND EFFECTS
+    ================================= */
+
     --color-border: rgba(140, 220, 255, 0.5);
     --color-shadow: rgba(0, 70, 130, 0.3);
     --color-glow: rgba(100, 200, 255, 0.7);
 
-    /* Glass effects */
+    /* Glass highlights */
+    --color-glass-highlight: rgba(190, 235, 255, 0.2);
+
+    /* Text shadows */
+    --color-text-shadow: rgba(0, 0, 0, 0.9);
+    --color-text-glow: rgba(0, 0, 0, 0.4);
+    --color-dark-shadow: rgba(0, 0, 0, 0.8);
+
+    /* Badge shadow */
+    --color-badge-shadow: rgba(0, 0, 0, 0.5);
+
+    /* Alert glow */
+    --color-alert-glow: rgba(70, 180, 255, 0.4);
+
+    /* =================================
+       GLASS EFFECTS
+    ================================= */
+
     --glass-blur: 12px;
 }
+
+
+/* =================================
+   BODY
+================================= */
 
 body {
     margin: 0;
@@ -27,6 +68,11 @@ body {
     overflow: hidden;
     font-family: 'Noto Sans Thai', sans-serif;
 }
+
+
+/* =================================
+   CHAT CONTAINER
+================================= */
 
 #chat {
     position: absolute;
@@ -36,6 +82,11 @@ body {
     flex-direction: column;
     padding-bottom: 12px;
 }
+
+
+/* =================================
+   MESSAGE
+================================= */
 
 .message {
     position: relative;
@@ -53,6 +104,11 @@ body {
         cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
 
+
+/* =================================
+   MESSAGE TEXT
+================================= */
+
 .message-text {
     position: relative;
     z-index: 1;
@@ -68,8 +124,8 @@ body {
 
     background: linear-gradient(
         135deg,
-        rgba(255, 220, 100, 0.35),
-        rgba(255, 245, 190, 0.18)
+        var(--gradient-message-start),
+        var(--gradient-message-end)
     );
 
     backdrop-filter: blur(var(--glass-blur));
@@ -86,18 +142,22 @@ body {
 
     box-shadow:
         0 8px 32px var(--color-shadow),
-        inset 0 0 12px rgba(255, 255, 220, 0.2);
+        inset 0 0 12px var(--color-glass-highlight);
 
     color: var(--color-text);
 
     text-shadow:
-        2px 2px 4px rgba(0, 0, 0, 0.9),
-        0 0 8px rgba(0, 0, 0, 0.4);
+        2px 2px 4px var(--color-text-shadow),
+        0 0 8px var(--color-text-glow);
 
     overflow-wrap: anywhere;
 }
 
-/* Container for badges and username */
+
+/* =================================
+   USER INFO
+================================= */
+
 .user-info {
     position: relative;
     z-index: 2;
@@ -112,8 +172,8 @@ body {
 
     background: linear-gradient(
         135deg,
-        rgba(184, 134, 11, 0.95),
-        rgba(255, 205, 70, 0.9)
+        var(--gradient-user-start),
+        var(--gradient-user-end)
     );
 
     backdrop-filter: blur(8px);
@@ -129,6 +189,11 @@ body {
     );
 }
 
+
+/* =================================
+   USERNAME
+================================= */
+
 .user {
     font-family: 'Noto Sans Thai', sans-serif;
     font-weight: 800;
@@ -136,33 +201,52 @@ body {
     margin-right: 2px;
 
     text-shadow:
-        1px 1px 3px rgba(0, 0, 0, 0.8),
+        1px 1px 3px var(--color-dark-shadow),
         0 0 10px var(--color-glow);
 }
 
-/* Badge styling */
+
+/* =================================
+   BADGES
+================================= */
+
 .badge {
     width: 18px;
     height: 18px;
     margin-right: 4px;
     vertical-align: middle;
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+
+    filter: drop-shadow(
+        0 2px 4px var(--color-badge-shadow)
+    );
 }
 
-/* Emote styling */
+
+/* =================================
+   EMOTES
+================================= */
+
 .emote {
     vertical-align: middle;
     height: 28px;
     margin: -4px 0;
 }
 
-/* Smooth fade out */
+
+/* =================================
+   FADE OUT
+================================= */
+
 .fade-out {
     opacity: 0 !important;
     transition: opacity 0.5s ease;
 }
 
-/* Watery, buoyant entry animation */
+
+/* =================================
+   MESSAGE ANIMATION
+================================= */
+
 @keyframes fluidSlideIn {
     0% {
         opacity: 0;
@@ -177,6 +261,11 @@ body {
     }
 }
 
+
+/* =================================
+   ALERT CONTAINER
+================================= */
+
 #alerts {
     position: absolute;
     top: 24px;
@@ -190,13 +279,18 @@ body {
     pointer-events: none;
 }
 
+
+/* =================================
+   ALERT
+================================= */
+
 .alert {
     padding: 16px 20px;
 
     background: linear-gradient(
         135deg,
-        rgba(255, 215, 90, 0.45),
-        rgba(255, 245, 190, 0.25)
+        var(--gradient-alert-start),
+        var(--gradient-alert-end)
     );
 
     backdrop-filter: blur(var(--glass-blur));
@@ -213,7 +307,7 @@ body {
 
     box-shadow:
         0 8px 32px var(--color-shadow),
-        inset 0 0 12px rgba(255, 255, 220, 0.2);
+        inset 0 0 12px var(--color-glass-highlight);
 
     color: var(--color-text);
     text-align: center;
@@ -221,6 +315,11 @@ body {
     animation: alertSlideIn 0.5s
         cubic-bezier(0.23, 1, 0.32, 1) forwards;
 }
+
+
+/* =================================
+   ALERT TITLE
+================================= */
 
 .alert h2 {
     margin: 0 0 8px;
@@ -232,9 +331,14 @@ body {
 
     text-shadow:
         0 0 8px var(--color-glow),
-        0 0 16px rgba(255, 200, 0, 0.4),
-        2px 2px 4px rgba(0, 0, 0, 0.8);
+        0 0 16px var(--color-alert-glow),
+        2px 2px 4px var(--color-dark-shadow);
 }
+
+
+/* =================================
+   ALERT USERNAME
+================================= */
 
 .alert p:nth-of-type(1) {
     margin: 4px 0;
@@ -247,6 +351,11 @@ body {
         0 0 8px var(--color-glow);
 }
 
+
+/* =================================
+   ALERT DESCRIPTION
+================================= */
+
 .alert p:nth-of-type(2) {
     margin: 4px 0 0;
     font-size: 15px;
@@ -254,8 +363,13 @@ body {
     color: var(--color-text-secondary);
 
     text-shadow:
-        1px 1px 3px rgba(0, 0, 0, 0.8);
+        1px 1px 3px var(--color-dark-shadow);
 }
+
+
+/* =================================
+   ALERT ANIMATION
+================================= */
 
 @keyframes alertSlideIn {
     0% {
